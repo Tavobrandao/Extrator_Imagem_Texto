@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrator de Texto de Imagem</title>
+</head>
+<body>
+    <input type="file" id="imageUpload" />
+    <button onclick="extractText()">Extrair Texto</button>
+    <textarea id="result"></textarea>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <script>
+        function extractText() {
+            const imagemUpload = document.getElementById('imageUpload');
+            const result = document.getElementById('result');
+
+            Tesseract.recognize(imageUpload.files[0])
+                .then(({ data: { text } }) => {
+                    result.value = text;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
