@@ -4,26 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extrator de Texto de Imagem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
 </head>
 <body>
     <input type="file" id="imageUpload" />
+    <img id="imagePreview" style="display: none;" />
     <button onclick="extractText()">Extrair Texto</button>
-    <textarea id="result"></textarea>
+    <textarea id="result" placeholder="O texto vai aparecer aqui"></textarea>
+    <button onclick="saveText()">Salvar Texto</button>
+    <button onclick="toggleTheme()">Modo escuro</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
-    <script>
-        function extractText() {
-            const imagemUpload = document.getElementById('imageUpload');
-            const result = document.getElementById('result');
-
-            Tesseract.recognize(imageUpload.files[0])
-                .then(({ data: { text } }) => {
-                    result.value = text;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
